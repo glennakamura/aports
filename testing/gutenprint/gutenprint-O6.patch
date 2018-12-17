@@ -1,7 +1,7 @@
-diff -up gutenprint-5.2.7/configure.ac.O6 gutenprint-5.2.7/configure.ac
---- gutenprint-5.2.7/configure.ac.O6	2011-05-02 03:20:49.000000000 +0200
-+++ gutenprint-5.2.7/configure.ac	2011-05-05 12:40:29.000000000 +0200
-@@ -625,27 +625,6 @@ AH_TEMPLATE(PKGMODULEDIR,, [Package modu
+diff -Nrup a/configure.ac b/configure.ac
+--- a/configure.ac	2018-04-08 01:57:43.000000000 +0000
++++ b/configure.ac	2018-04-08 01:57:43.000000000 +0000
+@@ -660,27 +660,6 @@ AH_TEMPLATE(PKGMODULEDIR,, [Package modu
  PKGMODULEDIR="${PACKAGE_LIB_DIR}/${GUTENPRINT_RELEASE_VERSION}/modules"
  AC_DEFINE_UNQUOTED(PKGMODULEDIR, ["$PKGMODULEDIR"])
  
@@ -9,7 +9,7 @@ diff -up gutenprint-5.2.7/configure.ac.O6 gutenprint-5.2.7/configure.ac
 -if test x$ac_compiler_gnu = "xyes"; then
 -  STP_ADD_COMPILER_ARGS([-Wall -Wcast-align -Wstrict-prototypes -Wmissing-prototypes -Wmissing-declarations -Wnested-externs -Wwrite-strings -Werror-implicit-function-declaration -Winline -Wformat=2 -finline-limit=131072],, [GNUCFLAGS])
 -  if test x${USE_MAINTAINER_MODE} = xyes ; then
--    STP_ADD_COMPILER_ARGS([-pedantic -Waggregate-return -Wcast-qual -Wshadow -Wredundant-decls],, [GNUCFLAGS])
+-    STP_ADD_COMPILER_ARGS([-D_POSIX_C_SOURCE=200809L -std=c99 -pedantic -Waggregate-return -Wcast-qual -Wshadow -Wredundant-decls],, [GNUCFLAGS])
 -  fi
 -  if test x$ENABLE_DEBUG = xyes ; then
 -    STP_ADD_COMPILER_ARG([-g])
@@ -29,14 +29,13 @@ diff -up gutenprint-5.2.7/configure.ac.O6 gutenprint-5.2.7/configure.ac
  AC_SUBST(GNUCFLAGS)
  
  AH_TEMPLATE([HAVE_GCC_ATTRIBUTES],
-diff -up gutenprint-5.2.7/configure.O6 gutenprint-5.2.7/configure
---- gutenprint-5.2.7/configure.O6	2011-05-02 03:32:21.000000000 +0200
-+++ gutenprint-5.2.7/configure	2011-05-05 12:52:09.000000000 +0200
-@@ -16589,246 +16589,6 @@ cat >>confdefs.h <<_ACEOF
- #define PKGMODULEDIR "$PKGMODULEDIR"
+diff -Nrup a/configure b/configure
+--- a/configure	2018-04-08 01:58:13.000000000 +0000
++++ b/configure	2018-04-08 01:58:13.000000000 +0000
+@@ -18464,242 +18476,6 @@ cat >>confdefs.h <<_ACEOF
  _ACEOF
  
--
+ 
 -if test x$ac_compiler_gnu = "xyes"; then
 -
 -  for stp_ac_arg in -Wall -Wcast-align -Wstrict-prototypes -Wmissing-prototypes -Wmissing-declarations -Wnested-externs -Wwrite-strings -Werror-implicit-function-declaration -Winline -Wformat=2 -finline-limit=131072 ; do
@@ -73,7 +72,7 @@ diff -up gutenprint-5.2.7/configure.O6 gutenprint-5.2.7/configure
 -
 -  if test x${USE_MAINTAINER_MODE} = xyes ; then
 -
--  for stp_ac_arg in -pedantic -Waggregate-return -Wcast-qual -Wshadow -Wredundant-decls ; do
+-  for stp_ac_arg in -D_POSIX_C_SOURCE=200809L -std=c99 -pedantic -Waggregate-return -Wcast-qual -Wshadow -Wredundant-decls ; do
 -
 -  { $as_echo "$as_me:${as_lineno-$LINENO}: checking if ${CC} supports ${stp_ac_arg}" >&5
 -$as_echo_n "checking if ${CC} supports ${stp_ac_arg}... " >&6; }
@@ -273,9 +272,6 @@ diff -up gutenprint-5.2.7/configure.O6 gutenprint-5.2.7/configure
 -  CFLAGS="${stp_newCFLAGS}"
 -
 -fi
--
--
--
- { $as_echo "$as_me:${as_lineno-$LINENO}: checking if $CC supports __attribute__ syntax" >&5
- $as_echo_n "checking if $CC supports __attribute__ syntax... " >&6; }
- cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ 
+ 
+ 
