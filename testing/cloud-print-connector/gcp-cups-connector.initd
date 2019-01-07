@@ -1,0 +1,16 @@
+#!/sbin/openrc-run
+
+command="/usr/bin/gcp-cups-connector"
+command_background="true"
+command_user="gcp:gcp"
+
+pidfile="/run/${RC_SVCNAME}.pid"
+
+depend() {
+	need avahi-daemon cupsd
+}
+
+start_pre() {
+	# clean up socket file that may exist if system crashed
+	rm -f /tmp/cloud-print-connector*.sock
+}

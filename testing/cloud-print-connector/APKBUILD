@@ -1,0 +1,42 @@
+# Contributor: Glen Nakamura <glen@imodulo.com>
+# Maintainer: Glen Nakamura <glen@imodulo.com>
+pkgname=cloud-print-connector
+pkgver=1.16
+pkgrel=0
+pkgdesc="Google cloud print CUPS connector"
+url="https://github.com/google/cloud-print-connector"
+arch="all"
+license="BSD"
+depends="avahi cups"
+makedepends="avahi-dev bzr cups-dev go"
+install="$pkgname.pre-install"
+pkggroups="gcp"
+pkgusers="gcp"
+subpackages=""
+source="gcp-cups-connector.initd"
+builddir="$srcdir/"
+
+prepare() {
+	default_prepare
+	export GOPATH="$builddir"
+	go get -d github.com/google/$pkgname/...
+}
+
+build() {
+	cd "$builddir"
+	go install -ldflags='-s -w' github.com/google/$pkgname/...
+}
+
+check() {
+	[ -f "$builddir"/bin/gcp-cups-connector ] && \
+	[ -f "$builddir"/bin/gcp-connector-util ]
+}
+
+package() {
+	install -D -m 755 "$srcdir"/gcp-cups-connector.initd \
+		"$pkgdir"/etc/init.d/gcp-cups-connector
+	mkdir -p "$pkgdir"/usr/bin
+	install -m 755 "$builddir"/bin/* "$pkgdir"/usr/bin
+}
+
+sha512sums="58a626091f622ddbc3425e3fa1984aa03cca3142a9310b4a8d446b3cbab76f53949a06fc051737201b6c8fef3a8989c60c68f3563c1234b630449bd64be62970  gcp-cups-connector.initd"
